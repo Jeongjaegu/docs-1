@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>SOFA Spec</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+  </head>
+  <body>
+    <article class="markdown-body"><h1 id="sofa-spec"><a class="header-link" href="#sofa-spec"></a>SOFA Spec</h1>
+<p>SOFA describes message schemas that provide standard message and attachment structures,
+simple UI controls, and commands for interactions with the Ethereum network.</p>
+<p>In the context of Token, these messages are sent between users, or between users and bots.</p>
+<h2 id="messages"><a class="header-link" href="#messages"></a>Messages</h2>
+<p>SOFA messages are plain text JSON payloads, with a special prefix that identifies the message type.
+The prefix takes the form:</p>
+<p><code>SOFA::Type:</code></p>
+<p>There are 6 top-level types/schemas:</p>
+<ul class="list">
+<li><strong>SOFA::Message</strong> - The general use message type that encapsulates any combination of plain text, buttons, and image/video/link attachments</li>
+<li><strong>SOFA::Command</strong> - Arbitrary command sent silently as the result of a button press</li>
+<li><strong>SOFA::Init</strong> - Initializes the recipient with metadata about the sender</li>
+<li><strong>SOFA::InitRequest</strong> - Triggers the recipient client to reply with an Init message</li>
+<li><strong>SOFA::Payment</strong> - Informs the recipient of an Ethereum transaction</li>
+<li><strong>SOFA::PaymentRequest</strong> - Requests an Ethereum transaction from the recipient</li>
+</ul>
+<h2 id="usage-examples"><a class="header-link" href="#usage-examples"></a>Usage Examples</h2>
+<h3 id="sofa::message"><a class="header-link" href="#sofa::message"></a>SOFA::Message</h3>
+<p>SOFA::Message is the general-use schema that provides all common messaging functionality.
+All top-level keys are optional. The structure is as follows:</p>
+<pre class="hljs"><code>{
+  <span class="hljs-string">"body"</span>: <span class="hljs-string">"…"</span>, <span class="hljs-comment">// text message</span>
+  <span class="hljs-string">"controls"</span>: [ <span class="hljs-comment">// list of UI controls to display in client</span>
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"…"</span>, <span class="hljs-comment">// supported types: button, group</span>
+      <span class="hljs-string">"label"</span>: <span class="hljs-string">"…"</span>, <span class="hljs-comment">// displayed button text</span>
+      <span class="hljs-string">"value"</span>: …, <span class="hljs-comment">// underlying value sent by tapping button</span>
+      <span class="hljs-string">"controls"</span>: …, <span class="hljs-comment">//nested list of controls inside type "group"</span>
+    }
+  ],
+  <span class="hljs-string">"showKeyboard"</span>: …, <span class="hljs-comment">// hints to the recipient whether freeform text responses will be accepted</span>
+  <span class="hljs-string">"attachments"</span>: [ <span class="hljs-comment">// images/videos/urls</span>
+     {
+       <span class="hljs-string">"type"</span>: <span class="hljs-string">"image"</span>,
+       <span class="hljs-string">"url"</span>: <span class="hljs-string">"…"</span>
+     }
+  ]
+}</code></pre><p>Example: A plain text message:</p>
+<pre class="hljs"><code>SOFA::Message:{
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"Hello, nice to meet you!"</span>
+}</code></pre><p>Example: A message that presents UI controls:</p>
+<pre class="hljs"><code>SOFA::Message:{
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"Now let’s try sending some money. Choose a charity to make a donation of $0.01."</span>,
+  <span class="hljs-attr">"controls"</span>: [
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Red Cross"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"red-cross"</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Ethereum foundation"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"ethereum-foundation"</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"GiveWell.org"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"givewell.org"</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Not now, thanks"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-number">-1</span>}
+  ]
+}</code></pre><p>Example: Question with prefilled common responses, and ability for typed text
+responses that the bot will attempt to parse and understand:</p>
+<pre class="hljs"><code>SOFA::Message:{
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"Great! Now that we've set that up, how often do you want to recieve reminders?"</span>,
+  <span class="hljs-attr">"controls"</span>: [
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Never"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-number">-1</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Once per week"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-number">1</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Twice per week"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-number">2</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Once per day"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-number">7</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Twice per day"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-number">14</span>}
+  ],
+  <span class="hljs-attr">"showKeyboard"</span>: <span class="hljs-literal">true</span>
+}</code></pre><p>Example: Message that presents a large nested menu of controls, including actions that trigger
+webview mode of app:</p>
+<pre class="hljs"><code>SOFA::Message:{
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"What would you like me to do for you right now?"</span>,
+  <span class="hljs-attr">"controls"</span>: [
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"group"</span>,
+      <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Trip"</span>,
+      <span class="hljs-attr">"controls"</span>: [
+        {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Directions"</span>, <span class="hljs-attr">"action"</span>: <span class="hljs-string">"Webview:/Directions"</span>},
+        {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Timetable"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"timetable"</span>},
+        {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Exit Info"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"exit"</span>},
+        {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Service Conditions"</span>, <span class="hljs-attr">"action"</span>: <span class="hljs-string">"Webview:/ServiceConditions"</span>}
+      ]
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"group"</span>,
+      <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Services"</span>,
+      <span class="hljs-attr">"controls"</span>: [
+        {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Buy Ticket"</span>, <span class="hljs-attr">"action"</span>: <span class="hljs-string">"buy-ticket"</span>},
+        {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Support"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"support"</span>}
+      ]
+    },
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Nothing"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-number">-1</span>}
+  ],
+  <span class="hljs-attr">"showKeyboard"</span>: <span class="hljs-literal">false</span>
+}</code></pre><p>Example: Message that adds visible UI controls but has no text message:</p>
+<pre class="hljs"><code>SOFA::Message:{
+  <span class="hljs-attr">"controls"</span>: [
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Tell me a joke!"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"joke"</span>},
+    {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"button"</span>, <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Show me a picture!"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"picture"</span>}
+  ]
+}</code></pre><h3 id="sofa::command"><a class="header-link" href="#sofa::command"></a>SOFA::Command</h3>
+<p>Message sent by client in which the user has tapped a button whose value is &quot;timetable&quot;:</p>
+<pre class="hljs"><code>SOFA::Command:{
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"Timetable"</span>,
+  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"timetable"</span>
+}</code></pre><h3 id="sofa::init"><a class="header-link" href="#sofa::init"></a>SOFA::Init</h3>
+<p>When a client speaks to a SOFA app for the first time, the first message should be
+of type Init, which provides context for the bot about who it is speaking to.</p>
+<pre class="hljs"><code>SOFA::Init:{
+  <span class="hljs-attr">"paymentAddress"</span>: <span class="hljs-string">"0xa2a0134f1df987bc388dbcb635dfeed4ce497e2a"</span>,
+  <span class="hljs-attr">"language"</span>: <span class="hljs-string">"en"</span>
+}</code></pre><h3 id="sofa::initrequest"><a class="header-link" href="#sofa::initrequest"></a>SOFA::InitRequest</h3>
+<p>If an Init message has not been sent, or needs to be re-sent, a bot may send
+an InitRequest message, which should trigger the client to send an Init
+message containing the requested information.</p>
+<pre class="hljs"><code>SOFA::InitRequest:{
+  <span class="hljs-attr">"values"</span>: [<span class="hljs-string">"paymentAddress"</span>, <span class="hljs-string">"language"</span>]
+}</code></pre><h3 id="sofa::payment"><a class="header-link" href="#sofa::payment"></a>SOFA::Payment</h3>
+<p>Notification of an Ethereum transaction. Only trustworthy when coming from
+a trusted source. Will often be sent multiple times, each time the status
+changes.</p>
+<pre class="hljs"><code>SOFA::Payment:{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"unverified"</span>,
+  <span class="hljs-attr">"txHash"</span>: <span class="hljs-string">"0x..."</span>,
+  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"0xce0eb154f900000"</span>
+}</code></pre><h3 id="sofa::paymentrequest"><a class="header-link" href="#sofa::paymentrequest"></a>SOFA::PaymentRequest</h3>
+<p>Request money from message recipient. This message contains all information required
+to execute payment if approved by recipient. Value is always denominated in Wei and
+hex encoded.</p>
+<pre class="hljs"><code>SOFA::PaymentRequest:{
+  <span class="hljs-attr">"body"</span>: <span class="hljs-string">"Thanks for the great time! Can you send your share of the tab?"</span>,
+  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"0xce0eb154f900000"</span>,
+  <span class="hljs-attr">"destinationAddress"</span>: <span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span>
+}</code></pre><h2 id="public-app-manifest"><a class="header-link" href="#public-app-manifest"></a>Public App Manifest</h2>
+<p>SOFA clients that are intended to accept communications publicly (such as a chatbot app)
+should provide a JSON manifest publicly available via HTTP GET request. This manifest is
+used by browsers to decide how to present your SOFA app to the user.</p>
+<p>Example manifest:</p>
+<pre class="hljs"><code>{
+  <span class="hljs-string">"displayName"</span>: <span class="hljs-string">"TokenBot"</span>,
+  <span class="hljs-string">"protocol"</span>: <span class="hljs-string">"sofa-v1.0"</span>, <span class="hljs-comment">//version of SOFA protocol</span>
+  <span class="hljs-string">"avatarUrl"</span>: <span class="hljs-string">"https://static-assets.tokenapp.com/avatar.png"</span>,
+  <span class="hljs-string">"interfaces"</span>: [<span class="hljs-string">"ChatBot"</span>,<span class="hljs-string">"WebApp"</span>], <span class="hljs-comment">// list of supported interfaces</span>
+  <span class="hljs-string">"ethereumAddress"</span>: <span class="hljs-string">"0x..."</span>, <span class="hljs-comment">// ethereum address of chat bot</span>
+  <span class="hljs-string">"webApp"</span>: <span class="hljs-string">"https://tokenapp.com"</span>, <span class="hljs-comment">// optional, URI of web view</span>
+  <span class="hljs-string">"languages"</span>: [<span class="hljs-string">"en"</span>] <span class="hljs-comment">// list of supported languages</span>
+}</code></pre>    </article>
+  </body>
+</html>
