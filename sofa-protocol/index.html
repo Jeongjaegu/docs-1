@@ -21,8 +21,8 @@ The prefix takes the form:</p>
 <ul class="list">
 <li><strong>SOFA::Message</strong> - The general use message type that encapsulates any combination of plain text, buttons, and image/video/link attachments</li>
 <li><strong>SOFA::Command</strong> - Arbitrary command sent silently as the result of a button press</li>
-<li><strong>SOFA::Init</strong> - Initializes the recipient with metadata about the sender</li>
-<li><strong>SOFA::InitRequest</strong> - Triggers the recipient client to reply with an Init message</li>
+<li><strong>SOFA::InitRequest</strong> - Requests metadata from the recipient client. Data is then sent using an Init message</li>
+<li><strong>SOFA::Init</strong> - Sends requested metadata from InitRequest</li>
 <li><strong>SOFA::Payment</strong> - Informs the recipient of an Ethereum transaction</li>
 <li><strong>SOFA::PaymentRequest</strong> - Requests an Ethereum transaction from the recipient</li>
 </ul>
@@ -108,18 +108,18 @@ webview mode of app:</p>
 <pre class="hljs"><code>SOFA::Command:{
   <span class="hljs-attr">"body"</span>: <span class="hljs-string">"Timetable"</span>,
   <span class="hljs-attr">"value"</span>: <span class="hljs-string">"timetable"</span>
-}</code></pre><h3 id="sofa::init"><a class="header-link" href="#sofa::init"></a>SOFA::Init</h3>
-<p>When a client speaks to a SOFA app for the first time, the first message should be
-of type Init, which provides context for the bot about who it is speaking to.</p>
-<pre class="hljs"><code>SOFA::Init:{
-  <span class="hljs-attr">"paymentAddress"</span>: <span class="hljs-string">"0xa2a0134f1df987bc388dbcb635dfeed4ce497e2a"</span>,
-  <span class="hljs-attr">"language"</span>: <span class="hljs-string">"en"</span>
 }</code></pre><h3 id="sofa::initrequest"><a class="header-link" href="#sofa::initrequest"></a>SOFA::InitRequest</h3>
 <p>If an Init message has not been sent, or needs to be re-sent, a bot may send
 an InitRequest message, which should trigger the client to send an Init
 message containing the requested information.</p>
 <pre class="hljs"><code>SOFA::InitRequest:{
   <span class="hljs-attr">"values"</span>: [<span class="hljs-string">"paymentAddress"</span>, <span class="hljs-string">"language"</span>]
+}</code></pre><h3 id="sofa::init"><a class="header-link" href="#sofa::init"></a>SOFA::Init</h3>
+<p>When a client speaks to a SOFA app for the first time, the first message should be
+of type Init, which provides context for the bot about who it is speaking to.</p>
+<pre class="hljs"><code>SOFA::Init:{
+  <span class="hljs-attr">"paymentAddress"</span>: <span class="hljs-string">"0xa2a0134f1df987bc388dbcb635dfeed4ce497e2a"</span>,
+  <span class="hljs-attr">"language"</span>: <span class="hljs-string">"en"</span>
 }</code></pre><h3 id="sofa::payment"><a class="header-link" href="#sofa::payment"></a>SOFA::Payment</h3>
 <p>Notification of an Ethereum transaction. Only trustworthy when coming from
 a trusted source. Will often be sent multiple times, each time the status
@@ -149,6 +149,7 @@ used by browsers to decide how to present your SOFA app to the user.</p>
   <span class="hljs-string">"ethereumAddress"</span>: <span class="hljs-string">"0x..."</span>, <span class="hljs-comment">// ethereum address of chat bot</span>
   <span class="hljs-string">"webApp"</span>: <span class="hljs-string">"https://tokenapp.com"</span>, <span class="hljs-comment">// optional, URI of web view</span>
   <span class="hljs-string">"languages"</span>: [<span class="hljs-string">"en"</span>] <span class="hljs-comment">// list of supported languages</span>
+  <span class="hljs-string">"initRequest"</span>: {<span class="hljs-string">"values"</span>: [<span class="hljs-string">"paymentAddress"</span>, <span class="hljs-string">"language"</span>]} <span class="hljs-comment">// hint to client that an Init message should be sent automatically when the app is opened</span>
 }</code></pre>    </article>
   </body>
 </html>
