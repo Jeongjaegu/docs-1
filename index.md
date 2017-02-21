@@ -9,7 +9,7 @@
 
 ## Specs
 
-- [SOFA Protocol](https://www.tokenbrowser.com/docs/sofa-protocol/)
+- [SOFA Protocol](https://www.sofaprotocol.org/)
 
 
 ## Libs
