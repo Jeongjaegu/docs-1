@@ -9,14 +9,15 @@ The token id address is extracted from the signature.</p>
   "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"testuser"</span></span>,
   "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">token_id</span>": <span class="hljs-value"><span class="hljs-string">"0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a"</span></span>,
-  "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span></span>,
-  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"testuser"</span></span>,
-  "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Dingus McDingusface"</span></span>,
-  "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-string">"I'm a digital Dingus"</span></span>,
-  "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">token_id</span>": <span class="hljs-value"><span class="hljs-string">"0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a"</span></span>,
+    "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"testuser"</span></span>,
+    "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Dingus McDingusface"</span></span>,
+    "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-string">"I'm a digital Dingus"</span></span>,
+"<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+"<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"already_registered"</span></span>,
@@ -45,14 +46,15 @@ The token id address is extracted from the signature.</p>
     </span>}
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="users-user-registration-post-1" class="action post"><h4 class="action-heading"><div class="name">Register a user without providing a username</div><a href="#users-user-registration-post-1" class="method post">POST</a><code class="uri">/v1/user</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://token-id-service.herokuapp.com</span>/v1/user</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Token-ID-Address</span>: <span class="hljs-string">0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a</span><br><span class="hljs-attribute">Token-Signature</span>: <span class="hljs-string">0xc39a479a92fe8d626324ff82a33684610ecd6b50714f59542a1ea558220ec6246a9193dd481078417b3b44d55933989587459d3dd50295d4da67d6580ac8646801</span><br><span class="hljs-attribute">Token-Timestamp</span>: <span class="hljs-string">1480077346</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">token_id</span>": <span class="hljs-value"><span class="hljs-string">"0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a"</span></span>,
-  "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"testuser"</span></span>,
-  "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-  "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-  "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">token_id</span>": <span class="hljs-value"><span class="hljs-string">"0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a"</span></span>,
+    "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"testuser"</span></span>,
+    "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+"<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+"<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+"<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"username_taken"</span></span>,
@@ -64,14 +66,15 @@ The token id address is extracted from the signature.</p>
   "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
   "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">token_id</span>": <span class="hljs-value"><span class="hljs-string">"0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a"</span></span>,
-  "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span></span>,
-  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"testuser"</span></span>,
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-  "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
-  "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-  "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">token_id</span>": <span class="hljs-value"><span class="hljs-string">"0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a"</span></span>,
+    "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"testuser"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+    "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+"<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+"<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+"<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"username_taken"</span></span>,
@@ -89,7 +92,8 @@ The token id address is extracted from the signature.</p>
   "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
   "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-string">"I'm a digital Dingus"</span></span>,
   "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Dingus McDingusface"</span></span>,
-  "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-string">"&lt;url for new avatar&gt;"</span>
+  "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-string">"&lt;url for new avatar&gt;"</span></span>,
+  "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
     {
@@ -119,7 +123,8 @@ The token id address is extracted from the signature.</p>
     "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
 "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Mr Tester"</span>
 <span class="hljs-string">"about"</span>: <span class="hljs-literal">null</span></span>,
-"<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
+"<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+"<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
     "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
         {
@@ -140,7 +145,8 @@ The token id address is extracted from the signature.</p>
   "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
   "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-string">"&lt;url for new avatar&gt;"</span></span>,
   "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Mr Tester"</span>
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Mr Tester"</span></span>,
+  "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
     "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
         {
@@ -177,12 +183,13 @@ Matches on usernames using Postgres LIKE operator</p>
     {
       "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"bobsmith"</span></span>,
       "<span class="hljs-attribute">payment_address</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span></span>,
-      "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+  "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
       "<span class="hljs-attribute">token_id</span>": <span class="hljs-value"><span class="hljs-string">"0x056db290f8ba3250ca64a45d16284d04bc6f5fbf"</span></span>,
-      "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-      "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-    </span>}
+  "<span class="hljs-attribute">about</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+  "<span class="hljs-attribute">avatar</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+    }
   ]</span>,
   "<span class="hljs-attribute">query</span>": <span class="hljs-value"><span class="hljs-string">"query=obsm"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="id-service-login" class="resource-group"><h2 class="group-heading">Id Service Login <a href="#id-service-login" class="permalink">&para;</a></h2><div id="id-service-login-login" class="resource"><h3 class="resource-heading">Login <a href="#id-service-login-login" class="permalink">&nbsp;&para;</a></h3><p>If sent signed, this will create an auth token for the user signing the request, and send that <code>auth_token</code> to all listeners of the <code>request_token</code></p>
@@ -209,7 +216,8 @@ Matches on usernames using Postgres LIKE operator</p>
 “is_app”: false,
 “about”: null,
 “avatar”: null,
-“name”: null
+“name”: null,
+“location”: null
 }</p>
 </li>
 </ul>
