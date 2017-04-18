@@ -4,7 +4,7 @@
 <p>The following can be used for generating a valid signature:</p>
 <ol>
 <li>If your request has no body skip to step 4.</li>
-<li>Take the body of your request and <a href="http://keccak.noekeon.org/">KECCAK-256</a> encode it.</li>
+<li>Take the body of your request and hash it with <a href="http://keccak.noekeon.org/">KECCAK-256</a>.</li>
 <li>Base64 encode the result of Step 1 as a string.</li>
 <li>Get the request verb of the request (e.g. <code>GET</code>, <code>POST</code>, etc) as a string.</li>
 <li>Get the path of the request as a string.</li>
@@ -29,7 +29,7 @@
 </ul>
 <h3 id="header-signing-the-payload">Signing the payload <a class="permalink" href="#header-signing-the-payload" aria-hidden="true">¶</a></h3>
 <ol>
-<li>Encode the payload with <a href="http://keccak.noekeon.org/">Keccak-256</a> encoding.</li>
+<li>Hash the payload with <a href="http://keccak.noekeon.org/">Keccak-256</a> encoding.</li>
 <li>Sign the encoded payload with a private key using recoverable ECDSA.</li>
 <li>Serialise and convert the result from step 2 to a hex string.</li>
 </ol>
