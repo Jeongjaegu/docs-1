@@ -91,7 +91,7 @@ The token id address is extracted from the signature.</p>
 <li>
 <p>App only properties</p>
 <ul>
-<li><code>categories</code>: A list of category id’s</li>
+<li><code>categories</code>: A list of category id’s or tags</li>
 </ul>
 </li>
 <li>
@@ -110,8 +110,8 @@ The token id address is extracted from the signature.</p>
   "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"TokenBot"</span></span>,
   "<span class="hljs-attribute">is_app</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
   "<span class="hljs-attribute">categories</span>": <span class="hljs-value">[
-    <span class="hljs-number">1</span>,
-    <span class="hljs-number">2</span>
+    <span class="hljs-string">"social"</span>,
+    <span class="hljs-string">"cats"</span>
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p>Used to update a user’s avatar</p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">multipart/form-data</span><br><span class="hljs-attribute">Token-ID-Address</span>: <span class="hljs-string">0x676f7cb80c9ff6a55e8992d94bac9a3212282c3a</span><br><span class="hljs-attribute">Token-Signature</span>: <span class="hljs-string">0xc39a479a92fe8d626324ff82a33684610ecd6b50714f59542a1ea558220ec6246a9193dd481078417b3b44d55933989587459d3dd50295d4da67d6580ac8646801</span><br><span class="hljs-attribute">Token-Timestamp</span>: <span class="hljs-string">1480077346</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">multipart/form-data; boundary=------------boundary</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code><span class="hljs-tag">&lt;<span class="hljs-title">image</span> <span class="hljs-attribute">encoded</span> <span class="hljs-attribute">as</span> <span class="hljs-attribute">mutilpart</span>/<span class="hljs-attribute">form-data</span>&gt;</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
@@ -132,7 +132,7 @@ The token id address is extracted from the signature.</p>
     <span class="hljs-string">"name"</span>: <span class="hljs-string">"TokenBot"</span>,
     <span class="hljs-string">"location"</span>: <span class="hljs-literal">null</span>,
     <span class="hljs-string">"public"</span>: <span class="hljs-literal">false</span>,
-    <span class="hljs-string">"categories"</span>: [{<span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Help"</span>, {<span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Cats"</span>}]
+    <span class="hljs-string">"categories"</span>: [{<span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"tag"</span>: <span class="hljs-string">"social"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Social"</span>, {<span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>, <span class="hljs-string">"tag"</span>: <span class="hljs-string">"cats"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Cats"</span>}]
 }</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
     {
@@ -259,8 +259,8 @@ The token id address is extracted from the signature.</p>
       "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
       "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
       "<span class="hljs-attribute">categories</span>": <span class="hljs-value">[
-        {"<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Help"</span></span>},
-        {"<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>, "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Cats"</span></span>}
+        {"<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>, "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"social"</span></span>, "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Social"</span></span>},
+        {"<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>, "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"cats"</span></span>, "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Cats"</span></span>}
       ]
       <span class="hljs-string">"public"</span>: <span class="hljs-literal">false</span>
     </span>}
@@ -310,18 +310,22 @@ The token id address is extracted from the signature.</p>
     "<span class="hljs-attribute">categories</span>": <span class="hljs-value">[
         {
             "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+            "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"help"</span></span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Help"</span>
         </span>},
         {
             "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+            "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"cats"</span></span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Cats"</span>
         </span>},
         {
             "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+            "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"games"</span></span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Games"</span>
         </span>},
         {
             "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+            "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"social"</span></span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Social"</span>
         </span>}
     }
