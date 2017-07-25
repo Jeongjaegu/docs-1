@@ -1,6 +1,6 @@
-# Token Documentation
+# Toshi Documentation
 
-A collection of Token documentation. Managed by Circle CI, published via Github Pages.
+A collection of Toshi documentation. Managed by Circle CI, published via Github Pages.
 
 
 ## Configuring Api Blueprint on Circle CI
@@ -23,4 +23,4 @@ deployment:
       - $HOME/docs/deploy-blueprint.sh $CIRCLE_PROJECT_REPONAME docs/api.apib $CIRCLE_SHA1
 ```
 
-Your documentation will be available at www.tokenbrowser.com/docs/your-repo-name/
+Your documentation will be available at www.toshi.org/docs/your-repo-name/

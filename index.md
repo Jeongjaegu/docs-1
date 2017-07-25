@@ -1,11 +1,11 @@
-# Token Documentation
+# Toshi Documentation
 
 ## Service APIs
 
-- [Token Chat Service](https://www.tokenbrowser.com/docs/token-chat-service/)
-- [Token ID Service](https://www.tokenbrowser.com/docs/token-id-service/)
-- [Token Ethereum Service](https://www.tokenbrowser.com/docs/token-ethereum-service/)
-- [Token Directory Service](https://www.tokenbrowser.com/docs/token-directory-service/)
+- [Toshi Chat Service](https://www.toshi.org/docs/toshi-chat-service/)
+- [Toshi ID Service](https://www.toshi.org/docs/toshi-id-service/)
+- [Toshi Ethereum Service](https://www.toshi.org/docs/toshi-ethereum-service/)
+- [Toshi Directory Service](https://www.toshi.org/docs/toshi-directory-service/)
 
 ## Specs
 
@@ -14,4 +14,4 @@
 
 ## Libs
 
-- [token-services-lib](https://www.tokenbrowser.com/docs/token-services-lib/)
+- [toshi-services-lib](https://www.toshi.org/docs/toshi-services-lib/)
